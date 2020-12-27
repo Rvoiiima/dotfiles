@@ -6,6 +6,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
+" To install plugins, please execute the command "vim +PluginInstall +qall
 " Input Plugin here 
 " Plugin '[Github Author]/[Github repo]' : formt
 Plugin 'airblade/vim-gitgutter'
@@ -13,6 +14,8 @@ Plugin 'nanotech/jellybeans.vim'          " jellybeans
 Plugin 'tomasr/molokai'
 Plugin 'raphamorim/lucario'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
 Plugin 'tpope/vim-surround'
 
 call vundle#end()
@@ -60,6 +63,36 @@ set incsearch
 set foldmethod=syntax
 set foldlevelstart=99
 
+"<C-Space> onmi complete
+imap <C-Space> <C-x><C-o>
+
+" AutoComplete blacket
+" ref. http://d.hatena.ne.jp/babie/20110130/1296348203
+inoremap ( ()<ESC>i
+inoremap <expr> ) ClosePair(')')
+inoremap < <><ESC>i
+inoremap <expr> > ClosePair('>')
+inoremap { {}<ESC>i
+inoremap <expr> } ClosePair('}')
+inoremap [ []<ESC>i
+inoremap <expr> ] ClosePair(']')
+" pair close checker.
+" from othree vimrc ( http://github.com/othree/rc/blob/master/osx/.vimrc )
+function! ClosePair(char)
+  if getline('.')[col('.') - 1] == a:char
+    return "\<Right>"
+  else
+    return a:char
+  endif
+endf
+
+" set auto NERDTree
+" ref. http://kokukuma.blogspot.jp/2011/12/vim-essential-plugin-nerdtree.html
+let file_name = expand("%")
+if has('vim_starting') &&  file_name == ""
+  autocmd VimEnter * NERDTree ./
+endif
+"set color scheme
 colorscheme lucario
 
 " Don't write backup file if vim is being called by "crontab -e"
