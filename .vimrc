@@ -55,7 +55,7 @@ set wildmenu
 set wildmode=list:longest,full
 
 set clipboard&
-set clipboard^=unnamedplus
+set clipboard^=unnamed
 set hlsearch
 set incsearch
 
